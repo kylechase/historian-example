@@ -1,16 +1,14 @@
 package com.inductiveautomation.ignition.examples.historian;
 
-import com.inductiveautomation.ignition.common.BundleUtil;
 import com.inductiveautomation.ignition.common.licensing.LicenseState;
-import com.inductiveautomation.ignition.gateway.config.NamedResourceHandler;
+import com.inductiveautomation.ignition.common.util.LoggerEx;
+import com.inductiveautomation.ignition.gateway.config.ExtensionPoint;
 import com.inductiveautomation.ignition.gateway.config.migration.ExtensionPointRecordMigrationStrategy;
 import com.inductiveautomation.ignition.gateway.config.migration.IdbMigrationStrategy;
 import com.inductiveautomation.ignition.gateway.config.migration.NamedRecordMigrationStrategy;
 import com.inductiveautomation.ignition.gateway.config.migration.SingletonRecordMigrationStrategy;
 import com.inductiveautomation.ignition.gateway.model.AbstractGatewayModuleHook;
 import com.inductiveautomation.ignition.gateway.model.GatewayContext;
-
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,25 +17,22 @@ import java.util.List;
  * strategies, and other module-level functionality.
  */
 public class GatewayHook extends AbstractGatewayModuleHook {
-    public static final String MODULE_ID = "com.inductiveautomation.ignition.examples.historian";
-
-    private NamedResourceHandler<Settings> namedResourceHandler;
+    private static final LoggerEx LOGGER = LoggerEx.newBuilder()
+        .build("example.historian.GatewayHook");
 
     @Override
     public void setup(GatewayContext context) {
-
-        // Register our localized properties with BundleUtil
-        BundleUtil.get().addBundle("HistorianExample", getClass(), "HistorianExample");
+        LOGGER.info("Setting up example historian");
     }
 
     @Override
     public void startup(LicenseState licenseState) {
-
+        LOGGER.info("Starting up example historian");
     }
 
     @Override
     public void shutdown() {
-        BundleUtil.get().removeBundle("HistorianExample");
+        LOGGER.info("Shutting down example historian");
     }
 
     /**
@@ -54,7 +49,7 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         //
         // In fact, we could just omit this method entirely, as the default implementation returns an empty list.
         // However, we include it here for demonstration purposes.
-        return Collections.emptyList();
+        return List.of();
     }
 
     /**
@@ -63,9 +58,7 @@ public class GatewayHook extends AbstractGatewayModuleHook {
      * management will be handled for you.
      */
     @Override
-    public List<? extends com.inductiveautomation.ignition.gateway.config.ExtensionPoint<?>> getExtensionPoints() {
-        return List.of(
-                new ExtensionPoint()
-        );
+    public List<ExtensionPoint<?>> getExtensionPoints() {
+        return List.of(new ExampleHistorianExtensionPoint());
     }
 }

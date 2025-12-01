@@ -17,8 +17,8 @@
     <properties>
         <ignition-platform-version>8.3.1</ignition-platform-version>
         <ignition-sdk-version>${ignition-platform-version}</ignition-sdk-version>
-        <module-name>MongoDB Secret Provider Example</module-name>
-        <module-description>Adds a secret provider backed by MongoDB to Ignition.</module-description>
+        <module-name>Historian Provider Example</module-name>
+        <module-description>Adds an example Historian provider to Ignition.</module-description>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>

@@ -27,11 +27,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 
-public class HistoryProvider extends AbstractHistorian<Settings> {
-    GatewayContext context;
-    HistorianSettings settings;
+public class ExampleHistorianProvider extends AbstractHistorian<ExampleHistorianSettings> {
+    private final GatewayContext context;
+    private final HistorianSettings settings;
 
-    public HistoryProvider(GatewayContext gatewayContext, String name, Settings settings) {
+    ExampleHistorianProvider(GatewayContext gatewayContext, String name, ExampleHistorianSettings settings) {
         super(gatewayContext, name);
         this.context = gatewayContext;
         this.settings = settings;
@@ -58,12 +58,12 @@ public class HistoryProvider extends AbstractHistorian<Settings> {
     }
 
     @Override
-    public boolean handleSettingsChange(Settings newSettings) {
+    public boolean handleSettingsChange(ExampleHistorianSettings newSettings) {
         return super.handleSettingsChange(newSettings);
     }
 
     @Override
-    public Settings getSettings() {
+    public ExampleHistorianSettings getSettings() {
         return super.getSettings();
     }
 
