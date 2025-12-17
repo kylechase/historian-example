@@ -29,7 +29,11 @@ public class GatewayHook extends AbstractGatewayModuleHook {
     @Override
     public void startup(LicenseState licenseState) {
         BundleUtil.get().addBundle(ExampleHistorianSettings.class);
-
+        try {
+            Class.forName("org.duckdb.DuckDBDriver");
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("Error importing DuckDB jar",e);
+        }
         LOGGER.info("Starting up example historian");
     }
 

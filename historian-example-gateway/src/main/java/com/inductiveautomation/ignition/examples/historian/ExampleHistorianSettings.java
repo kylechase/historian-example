@@ -14,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
  * Configuration for a Example Historian provider.
  */
 public record ExampleHistorianSettings(
-        @FormCategory("GENERAL")
+        @FormCategory("CONNECTION")
         @Label("Webdev Endpoint")
         @FormField(FormFieldType.TEXT)
         @DefaultValue("http://localhost:8088/system/webdev/test/historian")

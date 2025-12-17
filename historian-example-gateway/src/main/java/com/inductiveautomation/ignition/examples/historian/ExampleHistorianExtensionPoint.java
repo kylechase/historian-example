@@ -3,7 +3,6 @@ package com.inductiveautomation.ignition.examples.historian;
 import com.inductiveautomation.historian.gateway.api.Historian;
 import com.inductiveautomation.historian.gateway.api.HistorianProvider;
 import com.inductiveautomation.historian.gateway.api.config.HistorianSettings;
-import com.inductiveautomation.ignition.common.BundleUtil;
 import com.inductiveautomation.ignition.gateway.config.DecodedResource;
 import com.inductiveautomation.ignition.gateway.config.ExtensionPointConfig;
 import com.inductiveautomation.ignition.gateway.dataroutes.openapi.SchemaUtil;
@@ -18,9 +17,11 @@ import java.util.Optional;
 
 public class ExampleHistorianExtensionPoint extends HistorianExtensionPoint<ExampleHistorianSettings> {
 
+    public static final String EXTENSION_POINT_TYPE = "HistorianExample";
+
     public ExampleHistorianExtensionPoint() {
         super(
-            "HistorianExample",
+                EXTENSION_POINT_TYPE,
             "ExampleHistorianSettings.HistorianExampleType.Name",
             "ExampleHistorianSettings.HistorianExampleType.Desc");
     }
@@ -30,7 +31,7 @@ public class ExampleHistorianExtensionPoint extends HistorianExtensionPoint<Exam
         return Optional.of(new ExtensionPointResourceForm(
             HistorianExtensionPoint.getResourceType(),
             "Historian",
-            "HistorianExample",
+                EXTENSION_POINT_TYPE,
             SchemaUtil.fromType(HistorianProvider.class),
             SchemaUtil.fromType(ExampleHistorianSettings.class)));
     }
