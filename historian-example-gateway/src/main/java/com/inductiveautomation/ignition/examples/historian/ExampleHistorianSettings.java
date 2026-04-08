@@ -1,37 +1,40 @@
 package com.inductiveautomation.ignition.examples.historian;
 
 import com.inductiveautomation.historian.gateway.api.config.HistorianSettings;
-import com.inductiveautomation.ignition.gateway.dataroutes.openapi.annotations.DefaultValue;
 import com.inductiveautomation.ignition.gateway.dataroutes.openapi.annotations.DescriptionKey;
 import com.inductiveautomation.ignition.gateway.dataroutes.openapi.annotations.FormCategory;
 import com.inductiveautomation.ignition.gateway.dataroutes.openapi.annotations.FormField;
 import com.inductiveautomation.ignition.gateway.dataroutes.openapi.annotations.Label;
-import com.inductiveautomation.ignition.gateway.dataroutes.openapi.annotations.Required;
 import com.inductiveautomation.ignition.gateway.web.nav.FormFieldType;
-import org.apache.commons.lang3.StringUtils;
 
 /**
- * Configuration for a Example Historian provider.
+ * Configuration for an Example Historian provider.
  */
 public record ExampleHistorianSettings(
-        @FormCategory("GENERAL")
-        @Label("Webdev Endpoint")
-        @FormField(FormFieldType.TEXT)
-        @DefaultValue("http://localhost:8088/system/webdev/test/historian")
-        @Required
-        @DescriptionKey("ExampleHistorianSettings.WebdevEndpoint.Desc")
-        String webdevEndpoint
+        @FormCategory("General")
+        @Label("Maximum Stored datapoints")
+        @FormField(FormFieldType.NUMBER)
+        @DescriptionKey("ExampleHistorianSettings.MaxDataPoints.Desc")
+        Integer maxDatapoints,
+        @FormCategory("General")
+        @Label("Maximum age of datapoints in milliseconds")
+        @FormField(FormFieldType.NUMBER)
+        @DescriptionKey("ExampleHistorianSettings.MaxAge.Desc")
+        Long maxAge
+
 ) implements HistorianSettings {
 
     public static final ExampleHistorianSettings DEFAULT =
-        new ExampleHistorianSettings("http://localhost:8088/system/webdev/test/historian");
+        new ExampleHistorianSettings(10000, 86400000L);
 
     /**
      * Canonical constructor that fills in default values for any null or blank parameters.
      *
-     * @param webdevEndpoint   The webdev endpoint to use
+     * @param maxDatapoints   The max points to store
+     * @param maxAge The max age of records on millis
      */
     public ExampleHistorianSettings {
-      webdevEndpoint = StringUtils.defaultIfBlank(webdevEndpoint, "http://localhost:8088/system/webdev/test/historian");
+      maxDatapoints = maxDatapoints == null ? DEFAULT.maxDatapoints : maxDatapoints;
+      maxAge = maxAge == null ? DEFAULT.maxAge : maxAge;
     }
 }

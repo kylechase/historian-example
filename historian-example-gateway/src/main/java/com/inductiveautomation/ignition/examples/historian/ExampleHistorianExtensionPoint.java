@@ -1,20 +1,17 @@
 package com.inductiveautomation.ignition.examples.historian;
 
 import com.inductiveautomation.historian.gateway.api.Historian;
+import com.inductiveautomation.historian.gateway.api.HistorianExtensionPoint;
 import com.inductiveautomation.historian.gateway.api.HistorianProvider;
 import com.inductiveautomation.historian.gateway.api.config.HistorianSettings;
-import com.inductiveautomation.ignition.common.BundleUtil;
 import com.inductiveautomation.ignition.gateway.config.DecodedResource;
 import com.inductiveautomation.ignition.gateway.config.ExtensionPointConfig;
 import com.inductiveautomation.ignition.gateway.dataroutes.openapi.SchemaUtil;
 import com.inductiveautomation.ignition.gateway.model.GatewayContext;
 import com.inductiveautomation.ignition.gateway.web.nav.ExtensionPointResourceForm;
 import com.inductiveautomation.ignition.gateway.web.nav.WebUiComponent;
-
-import com.inductiveautomation.historian.gateway.api.HistorianExtensionPoint;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 
 public class ExampleHistorianExtensionPoint extends HistorianExtensionPoint<ExampleHistorianSettings> {
 
@@ -45,6 +42,11 @@ public class ExampleHistorianExtensionPoint extends HistorianExtensionPoint<Exam
             .orElse(ExampleHistorianSettings.DEFAULT);
 
         return new ExampleHistorianProvider(context, decodedResource.name(), settings);
+    }
+
+    @Override
+    public Optional<ExampleHistorianSettings> defaultSettings() {
+        return Optional.of(ExampleHistorianSettings.DEFAULT);
     }
 
     @Override
